@@ -120,7 +120,8 @@ Custom property | Description | Default
 						 pattern="[[pattern]]"
 						 required$="[[required]]"
 						 auto-validate$="[[autoValidate]]"
-						 error-message="[[errorMessage]]">
+						 error-message="[[errorMessage]]"
+						 on-focused-changed="_focusedChanged">
 						 <div id="slot2" slot="prefix">
 							<dom-repeat items="[[items]]">
 								<template>
@@ -457,6 +458,16 @@ Custom property | Description | Default
 				this.dispatchEvent(new CustomEvent('chip-removed', {
 					detail: {
 						'chipLabel': chipLabel
+					},
+					composed: true,
+					bubbles: true
+				}));
+			}
+
+			_focusedChanged(event) {
+				this.dispatchEvent(new CustomEvent('focused-changed', {
+					detail: {
+						value: event.detail.value
 					},
 					composed: true,
 					bubbles: true
